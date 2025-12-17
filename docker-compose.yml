@@ -1,0 +1,12 @@
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-forwarder-24-7
+    restart: unless-stopped
+    volumes:
+      - ./downloads:/app/downloads
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production

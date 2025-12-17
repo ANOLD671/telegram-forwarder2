@@ -1,0 +1,42 @@
+{
+  "name": "telegram-forwarder",
+  "version": "1.0.0",
+  "description": "Telegram message forwarder with PM2 and Docker",
+  "main": "copier.js",
+  "scripts": {
+    "start": "node copier.js",
+    "dev": "node copier.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop telegram-forwarder",
+    "pm2:restart": "pm2 restart telegram-forwarder",
+    "pm2:logs": "pm2 logs telegram-forwarder",
+    "pm2:status": "pm2 status",
+    "docker:build": "docker build -t telegram-forwarder .",
+    "docker:run": "docker run -d --name telegram-bot --restart unless-stopped -p 3000:3000 -v ./downloads:/app/downloads -v ./logs:/app/logs --env-file .env telegram-forwarder",
+    "docker:compose": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:status": "docker-compose ps",
+    "docker:monitor": "./monitor.sh",
+    "docker:clean": "./stop.sh",
+    "docker:quick": "./start-docker.sh",
+    "health": "curl http://localhost:3000/health",
+    "status": "curl http://localhost:3000/status"
+  },
+  "dependencies": {
+    "telegram": "^2.19.2",
+    "dotenv": "^16.0.3",
+    "@iamtraction/google-translate": "^1.1.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "telegram",
+    "forwarder",
+    "pm2",
+    "docker",
+    "24-7"
+  ]
+}
